@@ -53,8 +53,39 @@ Parking-sign-recognition/
 ├── YOLO-OCR-NLP/                   # 🚧 Coming soon
 │   └── (to be added)
 │
-├── FastVLM/                        # 🚧 Coming soon
-│   └── (to be added)
+├── FastVLM/
+│   │── sft_data/                   # Supervised Fine-Tuning (SFT) dataset
+│    ├── train.json             # Training split (image–JSON instruction pairs)
+│    └── val.json               # Validation split for SFT
+│── pref_data/                  # Direct Preference Optimization (DPO) data
+│    └── dpo_pairs_v2.jsonl     # Chosen vs rejected pairs for preference learning
+│── gt_json/                    # Ground-truth labels for evaluation
+│    ├── IMG_xxxx.json          # Parking sign rule annotations
+│    └── ...                    # (Used for scoring metrics)
+│── images/                     # Raw parking sign images used for evaluation
+│    └── *.JPG / *.png          # Input images for SFT, DPO, and inference tests
+│── preds_sft/                  # Predictions from SFT-only model
+│    └── *.json                 # Model outputs before preference optimization
+│── preds_dpo/                  # Predictions from DPO-optimized model
+│    └── *.json                 # Final JSON outputs (better structure & accuracy)
+│── preds_timed/                # Time-measured prediction results
+│    └── IMG_xxx.json           # Used for runtime analysis (per-image latency)
+│── dpo_candidates/             # Candidate outputs generated during pair creation
+│    └── sample_chosen.json     # “Chosen” response examples
+│    └── sample_rejected.json   # “Rejected” response examples
+│── ml-fastvlm/                 # Base FastVLM 1.5B model (local checkpoint)
+│    └── checkpoints/           # Contains vision tower + language model weights
+│                               # (Ignored by .gitignore due to large size)
+│── tools/                      # Utility scripts
+│    └── eval_score.py          # Scoring script (precision, recall, JSON correctness)
+│    └── merge_lora.py          # Merge LoRA adapters into the base model
+│    └── dpo_data_builder.py    # Script for generating preference pairs
+│── FastVLM+RLHF.ipynb          # Main training & inference notebook
+│                               # - Loads FastVLM offline
+│                               # - Runs SFT (LoRA)
+│                               # - Runs DPO optimization
+│                               # - Performs evaluation & timing tests
+└── requirements.txt            # Python dependencies (transformers, peft, torch, etc.)
 │
 ├── .gitignore                      # Git ignore rules
 └── README.md                       # This file
@@ -139,6 +170,97 @@ This will:
 - ✅ Validate on test set
 - ✅ Compare with previous version
 
+## 🚀 Quick Start (FastVLM + RLHF Pipeline)
+
+### Prerequisites
+
+- Python 3.10+
+- CUDA-capable GPU (recommended)
+- ~15GB disk space (model + LoRA)
+- Offline mode supported (FastVLM 1.5B)
+
+### Installation
+
+```bash
+# Clone repository
+git clone https://github.com/yaoling000/Parking-sign-recognition.git
+cd Parking-sign-recognition/FastVLM_RLHF
+
+# Create virtual environment
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+### Quick Test
+
+```bash
+python tools/eval_score.py --pred_dir preds_sft/ --gt_dir gt_json/
+```
+
+This will:
+- ✅ Load the SFT-trained FastVLM model  
+- ✅ Parse parking-rule information from images  
+- ✅ Compare predictions with ground-truth JSONs  
+- ✅ Save results to `preds_sft/`
+
+---
+
+### RLHF Workflow
+
+#### Stage 1: Supervised Fine-Tuning (SFT)
+
+```bash
+python FastVLM_SFT.py \
+    --train_json sft_data/train.json \
+    --val_json sft_data/val.json \
+    --output_dir outputs/sft_lora/ \
+    --epochs 3 \
+    --lora_rank 8
+```
+
+This will:
+- ✅ Load FastVLM 1.5B in offline mode  
+- ✅ Train LoRA adapters using labeled image–JSON pairs  
+- ✅ Improve rule interpretation and JSON structure quality  
+- ✅ Save LoRA weights into `outputs/sft_lora/`
+
+**Manual Step**: Review SFT predictions in `preds_sft/`.
+
+---
+
+#### Stage 2: Direct Preference Optimization (DPO)
+
+```bash
+python FastVLM_DPO.py \
+    --pair_file pref_data/dpo_pairs_v2.jsonl \
+    --sft_lora outputs/sft_lora/ \
+    --output_dir outputs/dpo_lora/ \
+    --epochs 2
+```
+
+This will:
+- ✅ Load the SFT-trained LoRA  
+- ✅ Train using chosen vs rejected preference pairs  
+- ✅ Improve consistency and structure of generated rules  
+- ✅ Save DPO LoRA weights into `outputs/dpo_lora/`
+
+---
+
+### Final Prediction Test
+
+```bash
+python tools/eval_score.py \
+    --pred_dir preds_dpo/ \
+    --gt_dir gt_json/
+```
+
+This will:
+- ✅ Evaluate the DPO-optimized model  
+- ✅ Output precision, recall, and JSON structure
+
 ## 📊 YOLO-only Pipeline Features
 
 ### 1. Incremental Learning System
@@ -160,6 +282,33 @@ This will:
 - **Current best model: mAP@0.5 > 0.90**
 - Millisecond-level inference speed
 - Optimized for known parking sign categories
+
+## 📊 FastVLM + RLHF Pipeline Features
+
+### 1. Instruction-Following Understanding
+- Extracts complex parking rules from both text and symbols  
+- Handles multi-line layouts, arrows, time ranges, and exceptions  
+- Robust to sign damage, shadows, and partial occlusions  
+
+### 2. Supervised Fine-Tuning (SFT)
+- Aligns model outputs with curated image–JSON pairs  
+- Corrects structure inconsistencies in generated rules  
+- Produces stable and predictable machine-readable outputs  
+
+### 3. Direct Preference Optimization (DPO)
+- Learns human-like preferences between “better” vs “worse” answers  
+- Improves reasoning traces and reduces invalid outputs  
+- Enhances logical consistency across multi-rule signs  
+
+### 4. Offline & Lightweight LoRA Training
+- Fully offline pipeline (no external API required)  
+- LoRA updates train only **0.55%** of model weights  
+- Efficient training on consumer GPUs  
+
+### 5. High-Quality Structured Output
+- Generates standardized JSON with rule names, time windows, and arrows  
+- Ensures consistent field formatting across images  
+- Suitable for downstream parsing or constraint validation  
 
 ## 📖 Detailed Documentation
 
