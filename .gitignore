@@ -1,0 +1,31 @@
+cd /Users/yaoling/Documents/25s2/COMP5703/Week8/Incremental_learning/Incremental_learning_Code
+
+cat > .gitignore << 'EOF'
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDEs
+.DS_Store
+.idea/
+.vscode/
+
+# Model weights (如果base.pt很大的话)
+# base.pt
+
+# Training outputs
+output/
+incremental_output/
+runs/
+*.log
+
+# Large datasets (如果你想排除的话)
+# new_data/
+EOF
