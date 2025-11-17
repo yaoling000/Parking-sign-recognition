@@ -176,13 +176,6 @@ This project provides a comprehensive comparison of three different approaches:
 
 Full comparison results will be available after all three pipelines are implemented.
 
-## 🤝 Contributing
-
-This is a research project for COMP5703. Team contributions:
-- YOLO-only pipeline: [Your name]
-- YOLO+OCR+NLP pipeline: [Team member name]
-- FastVLM pipeline: [Team member name]
-
 ## 📝 Citation
 
 ```bibtex
@@ -194,10 +187,6 @@ This is a research project for COMP5703. Team contributions:
   howpublished={\url{https://github.com/yaoling000/Parking-sign-recognition}}
 }
 ```
-
-## 📄 License
-
-[Specify your license]
 
 ## 🙏 Acknowledgments
 
