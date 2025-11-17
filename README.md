@@ -14,14 +14,13 @@ We studied three methods to solve this problem:
    - Uses YOLOv8 alone to complete the entire process
    - Directly learns fine-grained categories on the signs
    - Enables rapid recognition of known categories
-   - **Current Performance: mAP@0.5 > 0.90** 🎯
 
-2. **YOLO + OCR + NLP Pipeline** (Coming Soon)
+2. **YOLO + OCR + NLP Pipeline** ✅ (Current Implementation)
    - YOLO for sign and symbol detection
    - PaddleOCR for text extraction
    - NLP for converting text into structured output
 
-3. **FastVLM Pipeline** (Coming Soon)
+3. **FastVLM Pipeline** ✅ (Current Implementation)
    - End-to-end vision-language model
    - Jointly processes images and text
    - RLHF optimization to reduce false outputs
@@ -63,11 +62,11 @@ Parking-sign-recognition/
 
 ## 🎯 Performance Summary
 
-| Method | Speed | Accuracy (mAP@0.5) | Status |
+| Method | Speed | Accuracy | Status |
 |--------|-------|-------------------|--------|
 | **YOLO-only** | ⚡ Millisecond-level | **> 0.90** | ✅ Implemented |
-| YOLO + OCR + NLP | 🐢 Moderate-Slow | TBD | 🚧 Coming Soon |
-| FastVLM | ⚡ Fast | TBD | 🚧 Coming Soon |
+| **YOLO + OCR + NLP** | 🐢 Moderate-Slow | **> 0.80** | ✅ Implemented |
+| **FastVLM** | ⚡ Fast | **> 0.30** | ✅ Implemented |
 
 ## 🚀 Quick Start (YOLO-only Pipeline)
 
@@ -179,10 +178,10 @@ Full comparison results will be available after all three pipelines are implemen
 ## 📝 Citation
 
 ```bibtex
-@misc{parking-sign-recognition-2024,
+@misc{parking-sign-recognition-2025,
   title={Australian Parking Sign Recognition: A Comparative Study},
-  author={Your Team Name},
-  year={2024},
+  author={CS15},
+  year={2025},
   publisher={GitHub},
   howpublished={\url{https://github.com/yaoling000/Parking-sign-recognition}}
 }
