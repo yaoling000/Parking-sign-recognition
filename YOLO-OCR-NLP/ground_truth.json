@@ -1,0 +1,282 @@
+[
+  {
+    "image": "03_Sydney_Victoria Street West_2.jpg",
+    "parking_signs": [
+      {
+        "id": 2,
+        "natural_language": "Loading zone, 30-minute limit, on the left.",
+        "text": {
+          "duration": "30-minute limit",
+          "days": null,
+          "time": [],
+          "direction": "on the left",
+          "rules": "loading zone"
+        },
+        "other_information": ""
+      },
+      {
+        "id": 1,
+        "natural_language": "Paid parking, 2-hour limit, Monday to Sunday including public holidays, between 9:00 AM and 10:00 PM, on the right.",
+        "text": {
+          "duration": "2-hour limit",
+          "days": "Monday to Sunday",
+          "time": [
+            [
+              "9:00 AM",
+              "10:00 PM"
+            ]
+          ],
+          "direction": "on the right",
+          "rules": "paid parking"
+        },
+        "other_information": "metered"
+      }
+    ]
+  },
+  {
+    "image": "6b14526038cc4e8fce4f3a17818915e0.jpg",
+    "parking_signs": [
+      {
+        "id": 1,
+        "natural_language": "Free parking, 2-hour limit, Monday to Friday, between 8:30 AM and 6:00 PM, on the left.",
+        "text": {
+          "duration": "2-hour limit",
+          "days": "Monday to Friday",
+          "time": [
+            [
+              "8:30 AM",
+              "6:00 PM"
+            ]
+          ],
+          "direction": "on the left",
+          "rules": "free parking"
+        },
+        "other_information": "permit holders excepted (Area 11)"
+      }
+    ]
+  },
+  {
+    "image": "08_Bourke_st_02.jpg",
+    "parking_signs": [
+      {
+        "id": 1,
+        "natural_language": "Free parking, 2-hour limit, Monday to Friday, between 8:00 AM and 6:00 PM, in both directions.",
+        "text": {
+          "duration": "2-hour limit",
+          "days": "Monday to Friday",
+          "time": [
+            [
+              "8:00 AM",
+              "6:00 PM"
+            ]
+          ],
+          "direction": "in both directions",
+          "rules": "free parking"
+        },
+        "other_information": "permit holders excepted (Area 41)"
+      }
+    ]
+  },
+  {
+    "image": "16_Sydney_John Street.jpg",
+    "parking_signs": [
+      {
+        "id": 2,
+        "natural_language": "No parking, on the left.",
+        "text": {
+          "duration": null,
+          "days": null,
+          "time": [],
+          "direction": "on the left",
+          "rules": "no parking"
+        },
+        "other_information": "no stopping sign present"
+      },
+      {
+        "id": 1,
+        "natural_language": "Free parking, 15-minute limit, between 6:00 AM and 7:00 PM, on the right.",
+        "text": {
+          "duration": "15-minute limit",
+          "days": null,
+          "time": [
+            [
+              "6:00 AM",
+              "7:00 PM"
+            ]
+          ],
+          "direction": "on the right",
+          "rules": "free parking"
+        },
+        "other_information": ""
+      }
+    ]
+  },
+  {
+    "image": "16_Sydney_John Street_2.jpg",
+    "parking_signs": [
+      {
+        "id": 1,
+        "natural_language": "Free parking, 15-minute limit, between 6:00 AM and 7:00 PM, on the left.",
+        "text": {
+          "duration": "15-minute limit",
+          "days": null,
+          "time": [
+            [
+              "6:00 AM",
+              "7:00 PM"
+            ]
+          ],
+          "direction": "on the left",
+          "rules": "free parking"
+        },
+        "other_information": ""
+      },
+      {
+        "id": 2,
+        "natural_language": "No parking, on the right.",
+        "text": {
+          "duration": null,
+          "days": null,
+          "time": [],
+          "direction": "on the right",
+          "rules": "no parking"
+        },
+        "other_information": ""
+      }
+    ]
+  },
+  {
+    "image": "20_Sydney_Elizabeth Street.jpg",
+    "parking_signs": [
+      {
+        "id": 1,
+        "natural_language": "Free parking, 15-minute limit, on the left.",
+        "text": {
+          "duration": "15-minute limit",
+          "days": null,
+          "time": [],
+          "direction": "on the left",
+          "rules": "free parking"
+        },
+        "other_information": ""
+      }
+    ]
+  },
+  {
+    "image": "21_Sydney_Railway Parade.jpg",
+    "parking_signs": [
+      {
+        "id": 2,
+        "natural_language": "No parking, on the left.",
+        "text": {
+          "duration": null,
+          "days": null,
+          "time": [],
+          "direction": "on the left",
+          "rules": "no parking"
+        },
+        "other_information": ""
+      },
+      {
+        "id": 1,
+        "natural_language": "Paid parking, 2-hour limit, Monday to Saturday including public holidays, between 9:00 AM and 7:00 PM, on the right.",
+        "text": {
+          "duration": "2-hour limit",
+          "days": "Monday to Saturday",
+          "time": [
+            [
+              "9:00 AM",
+              "7:00 PM"
+            ]
+          ],
+          "direction": "on the right",
+          "rules": "paid parking"
+        },
+        "other_information": "ticketed"
+      }
+    ]
+  },
+  {
+    "image": "b0d34e7d3cd44b7b96cf5271e0ba6abc.jpg",
+    "parking_signs": [
+      {
+        "id": 1,
+        "natural_language": "Paid parking, 2-hour limit, Monday to Saturday, between 8:00 AM and 6:00 PM, in both directions.",
+        "text": {
+          "duration": "2-hour limit",
+          "days": "Monday to Saturday",
+          "time": [
+            [
+              "8:00 AM",
+              "6:00 PM"
+            ]
+          ],
+          "direction": "in both directions",
+          "rules": "paid parking"
+        },
+        "other_information": "ticketed"
+      }
+    ]
+  },
+  {
+    "image": "f1f9edf122fbcac0215c207c8cb8be97.jpg",
+    "parking_signs": [
+      {
+        "id": 1,
+        "natural_language": "Free parking, 2-hour limit, Monday to Friday, between 8:30 AM and 6:00 PM, on the left.",
+        "text": {
+          "duration": "2-hour limit",
+          "days": "Monday to Friday",
+          "time": [
+            [
+              "8:30 AM",
+              "6:00 PM"
+            ]
+          ],
+          "direction": "on the left",
+          "rules": "free parking"
+        },
+        "other_information": "permit holders excepted (Area 11)"
+      }
+    ]
+  },
+  {
+    "image": "ff806760e87810fb2279998c63c5e55a.jpg",
+    "parking_signs": [
+      {
+        "id": 2,
+        "natural_language": "Restricted parking (bus zone), Monday to Friday, between 6:30 AM and 8:00 PM, on the left.",
+        "text": {
+          "duration": null,
+          "days": "Monday to Friday",
+          "time": [
+            [
+              "6:30 AM",
+              "8:00 PM"
+            ]
+          ],
+          "direction": "on the left",
+          "rules": "restricted parking"
+        },
+        "other_information": "bus zone"
+      },
+      {
+        "id": 1,
+        "natural_language": "Free parking, 2-hour limit, Monday to Friday, between 8:30 AM and 6:00 PM, on the right.",
+        "text": {
+          "duration": "2-hour limit",
+          "days": "Monday to Friday",
+          "time": [
+            [
+              "8:30 AM",
+              "6:00 PM"
+            ]
+          ],
+          "direction": "on the right",
+          "rules": "free parking"
+        },
+        "other_information": "permit holders excepted"
+      }
+    ]
+  }
+]
