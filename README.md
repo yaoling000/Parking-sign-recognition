@@ -567,7 +567,3 @@ Full comparison results will be available after all three pipelines are implemen
 
 - GitHub: [@yaoling000](https://github.com/yaoling000)
 - Project Issues: [Report here](https://github.com/yaoling000/Parking-sign-recognition/issues)
-
----
-
-**Current Status**: ✅ YOLO-only pipeline complete (mAP@0.5 > 0.90) | 🚧 Other pipelines coming soon
