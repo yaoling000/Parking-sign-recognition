@@ -453,6 +453,56 @@ This will:
 - Millisecond-level inference speed
 - Optimized for known parking sign categories
 
+## 📊 YOLO + OCR + NLP Pipeline Features
+
+### 1. High-Precision Sign Detection
+- YOLOv8-based object detection fine-tuned on Australian parking signs  
+- **mAP@0.5 > 0.90** on test dataset with diverse weather and lighting conditions  
+- Robust to partial occlusions, angled views, and cluttered backgrounds  
+- Outputs precise bounding boxes for downstream OCR processing  
+
+### 2. Custom PaddleOCR with TTA Augmentation
+- Fine-tuned detection model (`inference_det_v2/`) optimized for parking sign text  
+- Test-Time Augmentation (TTA) with rotation, flipping, and scaling  
+- Handles multi-oriented text, curved layouts, and small fonts  
+- Advanced polygon filtering to remove noise and improve accuracy  
+
+### 3. Rule-Based NLP Parser
+- Converts raw OCR text into structured parking rules (JSON format)  
+- Extracts time restrictions (e.g., "MON-FRI 8AM-6PM"), permit requirements, and special conditions  
+- Handles complex multi-rule signs with arrows, exceptions, and zone indicators  
+- Robust to OCR errors through fuzzy matching and domain-specific heuristics  
+
+### 4. Modular Three-Stage Architecture
+- **Stage A (YOLO)**: Sign localization and region extraction  
+- **Stage B (OCR)**: Text recognition with visualization overlays  
+- **Stage C (NLP)**: Rule parsing and structured output generation  
+- Each stage produces intermediate outputs for debugging and quality assurance  
+
+### 5. CPU-Optimized for Production
+- Fully functional on **CPU-only** systems (no GPU required)  
+- Optimized inference pipeline: **~9 seconds per image** on standard hardware  
+- Lightweight dependencies with minimal installation footprint  
+- Windows, Linux, and macOS compatible with unified codebase  
+
+### 6. Comprehensive Evaluation Framework
+- Ground truth comparison with precision, recall, and F1-score metrics  
+- Per-component evaluation (days, times, duration)  
+- Configurable false-positive penalties and matching strategies  
+- Automated batch evaluation with detailed error analysis  
+
+### 7. Explainable & Debuggable Pipeline
+- Visual outputs at each stage for human verification  
+- JSON outputs retain original OCR text alongside parsed rules  
+- Clear separation between detection, recognition, and parsing errors  
+- Detailed logging and error tracking for failure diagnosis  
+
+### 8. Flexible Input/Output Handling
+- Batch processing of multiple images with parallel inference  
+- Configurable confidence thresholds for YOLO and OCR  
+- Multiple output formats: JSON, visualization images, and logs  
+- Easy integration with external systems via standardized JSON schema  
+
 ## 📊 FastVLM + RLHF Pipeline Features
 
 ### 1. Instruction-Following Understanding
