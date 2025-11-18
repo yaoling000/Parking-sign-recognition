@@ -50,7 +50,7 @@ Parking-sign-recognition/
 │   ├── test.py                     # Testing script
 │   └── requirements.txt            # Python dependencies
 │
-├── YOLO-OCR-NLP/                   # ✅ YOLO + OCR + NLP pipeline (implemented)
+├── YOLO-OCR-NLP/                   # YOLO + OCR + NLP pipeline (implemented)
 │   ├── inference_det_v2/           # PaddleOCR detection model files
 │   │   ├── inference/              # Model inference configuration
 │   │   │   ├── inference.pdiparams      # Model parameters
@@ -179,6 +179,166 @@ This will:
 - ✅ Train new model version
 - ✅ Validate on test set
 - ✅ Compare with previous version
+
+## 🚀 Quick Start (YOLO-OCR-NLP Pipeline)
+
+### Prerequisites
+
+- Python 3.10+ (3.11 compatible)
+- Windows (CPU), Linux (GPU optional), or macOS (minimal mode)
+- ~5GB disk space (models + dependencies)
+- Offline mode supported (FastVLM 1.5B)
+
+### Installation
+
+```bash
+# Clone repository
+git clone https://github.com/yuxuanma9-ar/Parking-sign-recognition.git
+cd Parking-sign-recognition/YOLO-OCR-NLP
+
+# Create virtual environment
+python -m venv .venv
+.venv\Scripts\activate  # Windows: .venv\Scripts\activate
+
+# Upgrade pip
+python -m pip install --upgrade pip wheel setuptools
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Install PyTorch (CPU-only, recommended for Windows)
+pip install --index-url https://download.pytorch.org/whl/cpu torch torchvision torchaudio
+```
+
+**Note for Windows users**: If you encounter `shm.dll` or `torch.dll` errors, install the Visual C++ Redistributable:
+```
+https://aka.ms/vs/17/release/vc_redist.x64.exe
+```
+Then restart your terminal and re-activate the virtual environment.
+
+### Verify Installation
+
+```bash
+python verify_install.py
+```
+
+Expected output:
+```
+✓ NumPy OK
+✓ OpenCV OK
+✓ Albumentations OK
+✓ PaddlePaddle OK
+✓ PaddleOCR OK
+✓ YOLOv8 OK
+Passed 6/6 checks
+```
+
+### Run Complete Pipeline
+
+```bash
+# Run on all images in data/ folder
+python pipeline.py
+
+# Or specify custom input/output paths
+python pipeline.py --input_dir data/ --output_dir results/
+```
+
+Expected output:
+```
+[INFO] Running pipeline on 10 images...
+[INFO] Stage 1/3: YOLO Detection... ✓
+[INFO] Stage 2/3: OCR Recognition... ✓
+[INFO] Stage 3/3: NLP Parsing... ✓
+[INFO] Total runtime: 92.58 seconds (9.25 sec/image)
+[INFO] Results saved to: step_output/
+```
+
+Output structure:
+```
+step_output/
+├── stepA_output/              # YOLO cropped sign regions + JSON
+├── stepB_vis3.0/              # OCR visualizations overlaid on images
+└── nlp_output3.0/             # Final structured parking rules (JSON)
+    └── parking_rules_nlp_final_version.json
+```
+
+---
+
+## 🧪 Quick Test
+
+### Test on Sample Images
+
+```bash
+# Test with provided sample images
+python pipeline.py --input_dir data/ --visualize
+
+# Process a single image
+python pipeline.py --input data/IMG_0001.JPG --output results/
+```
+
+### Evaluate Against Ground Truth
+
+Compare your pipeline results against labeled annotations:
+
+```bash
+python eval_rules.py \
+  --gt ground_truth.json \
+  --pred nlp_output3.0/parking_rules_nlp_final_version.json \
+  --ignore_nl \
+  --gamma_fp_on_miss 0.30 \
+  --fp_on_unmatched_pred 1
+```
+
+Expected output:
+```
+=== Evaluation Results ===
+Precision: 0.892
+Recall: 0.876
+F1-Score: 0.884
+
+Per-Component Scores:
+  Days:     Precision=0.95, Recall=0.93, F1=0.94
+  Times:    Precision=0.88, Recall=0.85, F1=0.87
+  Duration: Precision=0.84, Recall=0.83, F1=0.84
+```
+## 🎯 Quick Examples
+
+### Example 1: Basic Usage
+```bash
+python pipeline.py
+```
+
+### Example 2: Single Image with Visualization
+```bash
+python pipeline.py --input data/IMG_0001.JPG --visualize
+```
+
+### Example 3: Custom Confidence Threshold
+```bash
+python pipeline.py --conf_threshold 0.7 --ocr_threshold 0.8
+```
+
+### Example 4: Full Evaluation
+```bash
+python pipeline.py && \
+python eval_rules.py \
+  --gt ground_truth.json \
+  --pred nlp_output3.0/parking_rules_nlp_final_version.json
+```
+
+---
+
+## 🐛 Common Issues & Solutions
+
+| Issue | Solution |
+|-------|----------|
+| ModuleNotFoundError: cv2 | `pip install opencv-python==4.6.0.66` |
+| YOLO crashes on Windows | Install VC++ Redistributable |
+| PaddleOCR installation fails | Use Python 3.10.x (not 3.12) |
+| Empty OCR results | Check YOLO output in stepA_output/ |
+| Low accuracy | Adjust thresholds or retrain models |
+
+---
 
 ## 🚀 Quick Start (FastVLM + RLHF Pipeline)
 
