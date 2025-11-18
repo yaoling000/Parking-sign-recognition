@@ -33,7 +33,7 @@ The data used in this project was obtained from hundreds of photos taken in vari
 
 ```
 Parking-sign-recognition/
-├── YOLO-only/                      # ✅ YOLO-only pipeline (implemented)
+├── YOLO-only/                      # YOLO-only pipeline
 │   ├── utils/                      # Utility modules
 │   │   ├── augment_utils.py       # Data augmentation
 │   │   ├── Version_manager.py     # Model versioning
