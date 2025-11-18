@@ -50,8 +50,19 @@ Parking-sign-recognition/
 │   ├── test.py                     # Testing script
 │   └── requirements.txt            # Python dependencies
 │
-├── YOLO-OCR-NLP/                   # 🚧 Coming soon
-│   └── (to be added)
+├── YOLO-OCR-NLP/                   # ✅ YOLO + OCR + NLP pipeline (implemented)
+│   ├── inference_det_v2/           # PaddleOCR detection model files
+│   │   ├── inference/              # Model inference configuration
+│   │   │   ├── inference.pdiparams      # Model parameters
+│   │   │   ├── inference.pdiparams.info # Parameter metadata
+│   │   │   └── inference.pdmodel        # Model architecture
+│   │   └── ...
+│   ├── eval_rules.py               # Parking rule evaluation and NLP parsing
+│   ├── pipeline.py                 # Main pipeline: YOLO → OCR → NLP
+│   ├── verify_install.py           # Environment verification script
+│   ├── ground_truth.json           # Ground truth annotations for evaluation
+│   ├── requirements.txt            # Python dependencies
+│   └── yolo_best.pt                # Trained YOLOv8 model weights
 │
 ├── FastVLM/
 │   │── sft_data/                   # Supervised Fine-Tuning (SFT) dataset
@@ -87,7 +98,6 @@ Parking-sign-recognition/
 │                               # - Performs evaluation & timing tests
 └── requirements.txt            # Python dependencies (transformers, peft, torch, etc.)
 │
-├── .gitignore                      # Git ignore rules
 └── README.md                       # This file
 ```
 
